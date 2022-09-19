@@ -25,7 +25,7 @@ spec:
       initContainers:
         - name: liquibase-base
           image: CONTAINER_IMAGE
-        imagePullPolicy: Always
+          imagePullPolicy: Always
       containers:
         - name: nginx
           image: nginx:1.14.2
