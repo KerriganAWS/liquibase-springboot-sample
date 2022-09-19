@@ -1,21 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: liquibase   ## name of the namespace
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: liquibase-deployment
+  namespace: liquibase
   labels:
-    app: liquibase
+    app: liquibase-base
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: liquibase
+      app: liquibase-base
   template:
     metadata:
       labels:
-        app: liquibase
+        app: liquibase-base
     spec:
       containers:
-        - name: liquibase
+        - name: liquibase-base
           image: CONTAINER_IMAGE
           ports:
             - containerPort: 80
