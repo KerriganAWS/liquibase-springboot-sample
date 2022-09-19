@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: liquibase-deployment
+  labels:
+    app: liquibase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: liquibase
+  template:
+    metadata:
+      labels:
+        app: liquibase
+    spec:
+      containers:
+        - name: liquibase
+          image: CONTAINER_IMAGE
+          ports:
+            - containerPort: 80
