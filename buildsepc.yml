@@ -46,7 +46,7 @@ phases:
       - kubectl apply -f kube-manifests/
       - echo "Completed applying changes to Kubernetes Objects"           
       # Create Artifacts which we can use if we want to continue our pipeline for other stages
-      - printf '[{"name":"01-DEVOPS-Nginx-Deployment.yml","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
+      - printf '[{"name":"liquibase-deployment.yml","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
       # Additional Commands to view your credentials      
       #- echo "Credentials Value is..  ${CREDENTIALS}"      
       #- echo "AWS_ACCESS_KEY_ID...  ${AWS_ACCESS_KEY_ID}"            
