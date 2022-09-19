@@ -31,18 +31,3 @@ spec:
           image: nginx:1.14.2
           ports:
           - containerPort: 80
-
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   namespace: liquibase
-#   name: liquibase-job
-# spec:
-#   template:
-#     spec:
-#       containers:
-#         - name: liquibase-base
-#           image: CONTAINER_IMAGE
-#           imagePullPolicy: Always
-#       restartPolicy: Never
-#   backoffLimit: 4

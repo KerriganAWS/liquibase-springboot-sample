@@ -7,9 +7,10 @@ phases:
       commands:
         # Docker Image Tag with Date Time & Code Buiild Resolved Source Version
         - TAG="latest"
+        - MANIFEST_FILE_NAME="liquibase-job.yml"
         # Update Image tag in our Kubernetes Job Manifest        
         - echo "Update Image tag in kube-manifest..."
-        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' kube-manifests/liquibase-job.yml
+        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' kube-manifests/$MANIFEST_FILE_NAME
         # Verify AWS CLI Version        
         - echo "Verify AWS CLI Version..."
         - aws --version
@@ -45,10 +46,10 @@ phases:
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
       # Apply changes to our Application using kubectl
       - echo "Apply changes to kube manifests"            
-      - kubectl apply -f kube-manifests/
+      - kubectl apply -f kube-manifests/$MANIFEST_FILE_NAME
       - echo "Completed applying changes to Kubernetes Objects"           
       # Create Artifacts which we can use if we want to continue our pipeline for other stages
-      - printf '[{"name":"liquibase-job.yml","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
+      - printf '[{"name":"$MANIFEST_FILE_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
       # Additional Commands to view your credentials      
       #- echo "Credentials Value is..  ${CREDENTIALS}"      
       #- echo "AWS_ACCESS_KEY_ID...  ${AWS_ACCESS_KEY_ID}"            
