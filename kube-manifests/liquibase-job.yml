@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: liquibase   ## name of the namespace
+
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: liquibase
+  name: liquibase-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: liquibase-base
+          image: CONTAINER_IMAGE
+          imagePullPolicy: Always
+      restartPolicy: Never
+  backoffLimit: 4
