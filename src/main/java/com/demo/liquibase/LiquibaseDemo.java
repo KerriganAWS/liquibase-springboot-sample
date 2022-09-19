@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LiquibaseDemo {
 
-    public static void main(String[] args) {
-        SpringApplication.run(LiquibaseDemo.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(LiquibaseDemo.class, args);
+  }
 }

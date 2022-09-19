@@ -8,22 +8,37 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: liquibase-deployment
+  name: nginx-deployment
   namespace: liquibase
   labels:
-    app: liquibase-base
+    app: nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: liquibase-base
+      app: nginx
   template:
     metadata:
       labels:
-        app: liquibase-base
+        app: nginx
     spec:
-      containers:
+      initContainers:
         - name: liquibase-base
           image: CONTAINER_IMAGE
-          ports:
-            - containerPort: 80
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   namespace: liquibase
+#   name: liquibase-job
+# spec:
+#   template:
+#     spec:
+#       containers:
+#         - name: liquibase-base
+#           image: CONTAINER_IMAGE
+#       restartPolicy: Never
+#   backoffLimit: 4
