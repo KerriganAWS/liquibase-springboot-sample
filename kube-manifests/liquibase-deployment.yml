@@ -24,10 +24,13 @@ spec:
     spec:
       initContainers:
         - name: liquibase-base
-          image: 405081423162.dkr.ecr.ap-northeast-1.amazonaws.com/aws-eks-liquibase-demo:2022-09-19.16.34.28.db58e7d7
+          image: CONTAINER_IMAGE
+        imagePullPolicy: Always
       containers:
         - name: nginx
           image: nginx:1.14.2
+          ports:
+          - containerPort: 80
 
 # apiVersion: batch/v1
 # kind: Job
