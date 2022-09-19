@@ -43,5 +43,6 @@ spec:
 #       containers:
 #         - name: liquibase-base
 #           image: CONTAINER_IMAGE
+#           imagePullPolicy: Always
 #       restartPolicy: Never
 #   backoffLimit: 4
