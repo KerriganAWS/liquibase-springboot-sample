@@ -23,6 +23,8 @@ phases:
       # Build Docker Image
       - echo "Build started on `date`"
       - echo "Building the Docker image..."
+      # Package demo via Maven
+      - ./mvnw clean package
       - docker build --tag $REPOSITORY_URI:$TAG .
   post_build:
     commands:
