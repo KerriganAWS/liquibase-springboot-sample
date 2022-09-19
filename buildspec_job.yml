@@ -49,14 +49,7 @@ phases:
       - kubectl apply -f kube-manifests/$MANIFEST_FILE_NAME
       - echo "Completed applying changes to Kubernetes Objects"           
       # Create Artifacts which we can use if we want to continue our pipeline for other stages
-      - printf '[{"name":"$MANIFEST_FILE_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
-      # Additional Commands to view your credentials      
-      #- echo "Credentials Value is..  ${CREDENTIALS}"      
-      #- echo "AWS_ACCESS_KEY_ID...  ${AWS_ACCESS_KEY_ID}"            
-      #- echo "AWS_SECRET_ACCESS_KEY...  ${AWS_SECRET_ACCESS_KEY}"            
-      #- echo "AWS_SESSION_TOKEN...  ${AWS_SESSION_TOKEN}"            
-      #- echo "AWS_EXPIRATION...  $AWS_EXPIRATION"             
-      #- echo "EKS_CLUSTER_NAME...  $EKS_CLUSTER_NAME"             
+      - printf '[{"name":"$MANIFEST_FILE_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json           
 artifacts:
   files: 
     - build.json   
