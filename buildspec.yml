@@ -31,6 +31,7 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
+      # Generate the changelog xml file.
       - echo "Comparing databases DEV to Testing"
       - ./liquibase/liquibase --changelog-file=src/main/resources/db/changelog/changes/codebuild-$CODEBUILD_BUILD_NUMBER.xml
                   --url="jdbc:mysql://$LIQUIBASE_TESTING_URL:3306/demo?autoReconnect=true&useSSL=false"
@@ -44,7 +45,7 @@ phases:
       # Build Docker Image
       - echo "Build started on `date`"
       - echo "Building the Docker image..."
-      # Package demo via Maven
+      # Package demo via Maven Wrapper
       - ./mvnw clean package
       - docker build --tag $REPOSITORY_URI:$TAG .
   post_build:

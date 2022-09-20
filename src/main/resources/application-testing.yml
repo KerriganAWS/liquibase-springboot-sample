@@ -2,5 +2,5 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://liquibase-testing.cxzsujcgmuzs.ap-northeast-1.rds.amazonaws.com:3306/demo?autoReconnect=true&useSSL=false
-    username: "admin"
-    password: "adminrds"
+    username: "${DATABASE_USERNAME}"
+    password: "${DATABASE_PASSWORD}"

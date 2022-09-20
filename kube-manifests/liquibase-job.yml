@@ -20,5 +20,17 @@ spec:
           env:
           - name: SPRING_PROFILES_ACTIVE
             value: "testing"
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: liquibase-database
+                key: username
+                optional: false
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: liquibase-database
+                key: password
+                optional: false
       restartPolicy: Never
   backoffLimit: 4
