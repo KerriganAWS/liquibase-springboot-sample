@@ -4,9 +4,9 @@ env:
     LIQUIBASE_DEV_URL: LIQUIBASE_DEV:host
     LIQUIBASE_DEV_USERNAME: LIQUIBASE_DEV:username
     LIQUIBASE_DEV_PASSWORD: LIQUIBASE_DEV:password
-    # LIQUIBASE_TESTING_URL: LIQUIBASE_TESTING:host
-    # LIQUIBASE_TESTING_USERNAME: LIQUIBASE_TESTING:username
-    # LIQUIBASE_TESTING_PASSWORD: LIQUIBASE_TESTING:password
+    LIQUIBASE_TESTING_URL: LIQUIBASE_TESTING:host
+    LIQUIBASE_TESTING_USERNAME: LIQUIBASE_TESTING:username
+    LIQUIBASE_TESTING_PASSWORD: LIQUIBASE_TESTING:password
 phases:
   install:
     runtime-versions:
@@ -29,6 +29,15 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
+      - echo "Comparing databases DEV to Testing"
+      - ./liquibase --changelog-file=src/main/resources/db/changelog/changes/codebuild-$CODEBUILD_BUILD_NUMBER.xml\
+                  --url="$LIQUIBASE_DEV_URL"\
+                  --username=$LIQUIBASE_DEV_USERNAME\
+                  --password=$LIQUIBASE_DEV_PASSWORD\
+                  --referenceUrl="$LIQUIBASE_TESTING_URL"\
+                  --referenceUsername=$LIQUIBASE_TESTING_USERNAME\
+                  --referencePassword=$LIQUIBASE_TESTING_PASSWORD\
+                  diff-changelog
       # Build Docker Image
       - echo "Build started on `date`"
       - echo "Building the Docker image..."
@@ -62,3 +71,4 @@ artifacts:
   files: 
     - build.json   
     - kube-manifests/*
+    - src/main/resources/db/changelog/changes/*
