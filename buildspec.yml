@@ -37,12 +37,13 @@ phases:
     commands:
       - echo "Comparing databases DEV to Testing"
       - liquibase --changelog-file=src/main/resources/db/changelog/changes/codebuild-$CODEBUILD_BUILD_NUMBER.xml\
-                  --url="$LIQUIBASE_DEV_URL"\
+                  --url="jdbc:mysql://$LIQUIBASE_DEV_URL:3306/demo"\
                   --username=$LIQUIBASE_DEV_USERNAME\
                   --password=$LIQUIBASE_DEV_PASSWORD\
-                  --referenceUrl="$LIQUIBASE_TESTING_URL"\
+                  --referenceUrl="jdbc:mysql://$LIQUIBASE_TESTING_URL:3306/demo"\
                   --referenceUsername=$LIQUIBASE_TESTING_USERNAME\
                   --referencePassword=$LIQUIBASE_TESTING_PASSWORD\
+                  --classpath=./liquibase/lib/mysql-connector-java-8.0.12.jar\
                   diff-changelog
       # Build Docker Image
       - echo "Build started on `date`"
