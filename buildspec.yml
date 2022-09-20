@@ -11,12 +11,6 @@ phases:
   install:
     runtime-versions:
       java: corretto11
-    commands: 
-        - echo "Installing liquibase command line.."
-        - yum install unzip
-        - wget -O liquibase-4.16.1.zip "https://github.com/liquibase/liquibase/releases/download/v4.16.1/liquibase-4.16.1.zip" && unzip liquibase-4.16.1.zip -d liquibase 
-        - chmod +x ./liquibase/liquibase
-        - mkdir -p ~/bin && cp -r ./liquibase/* ~/bin && export PATH=~/bin:$PATH
   pre_build:
       commands:
         # Docker Image Tag with Date Time & Code Buiild Resolved Source Version
