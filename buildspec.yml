@@ -11,6 +11,13 @@ phases:
   install:
     runtime-versions:
       java: corretto11
+    commands: 
+        - echo "Installing liquibase command line.."
+        - apt-get install unzip
+        - wget -qO- "https://github.com/liquibase/liquibase/releases/download/v4.16.1/liquibase-4.16.1.zip"
+        - unzip liquibase-4.16.1.zip
+        - chmod +x ./liquibase-4.16.1/liquibase
+        - mkdir -p ~/bin && cp ./liquibase-4.16.1/* ~/bin && export PATH=~/bin:$PATH
   pre_build:
       commands:
         # Docker Image Tag with Date Time & Code Buiild Resolved Source Version
