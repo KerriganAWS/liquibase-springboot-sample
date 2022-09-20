@@ -16,7 +16,8 @@ phases:
         - echo "LIQUIBASE_DEV_USERNAME:$LIQUIBASE_DEV_USERNAME"
         - echo "LIQUIBASE_DEV_PASSWORD:$LIQUIBASE_DEV_PASSWORD"
         - echo "Installing liquibase command line.."
-        - apt-get install unzip
+        - apt-get update -y
+        - apt-get install -y unzip
         - wget -qO- "https://github.com/liquibase/liquibase/releases/download/v4.16.1/liquibase-4.16.1.zip" | unzip liquibase-4.16.1.zip
         - chmod +x ./liquibase-4.16.1/liquibase
         - mkdir -p ~/bin && cp ./liquibase-4.16.1/liquibase ~/bin/liquibase && export PATH=~/bin:$PATH
