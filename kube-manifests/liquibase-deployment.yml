@@ -26,6 +26,9 @@ spec:
         - name: liquibase-base
           image: CONTAINER_IMAGE
           imagePullPolicy: Always
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: "testing"
       containers:
         - name: nginx
           image: nginx:1.14.2

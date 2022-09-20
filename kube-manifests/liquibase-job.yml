@@ -17,5 +17,8 @@ spec:
         - name: liquibase-base
           image: CONTAINER_IMAGE
           imagePullPolicy: Always
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: "testing"
       restartPolicy: Never
   backoffLimit: 4
