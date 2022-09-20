@@ -13,7 +13,7 @@ phases:
       java: corretto11
     commands: 
         - echo "Installing liquibase command line.."
-        - apt-get install unzip
+        - yum install unzip
         - wget -qO- "https://github.com/liquibase/liquibase/releases/download/v4.16.1/liquibase-4.16.1.zip"
         - unzip liquibase-4.16.1.zip
         - chmod +x ./liquibase-4.16.1/liquibase
