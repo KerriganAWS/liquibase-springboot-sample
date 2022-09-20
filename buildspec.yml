@@ -14,10 +14,9 @@ phases:
     commands: 
         - echo "Installing liquibase command line.."
         - yum install unzip
-        - wget -qO- "https://github.com/liquibase/liquibase/releases/download/v4.16.1/liquibase-4.16.1.zip"
-        - unzip liquibase-4.16.1.zip
-        - chmod +x ./liquibase-4.16.1/liquibase
-        - mkdir -p ~/bin && cp ./liquibase-4.16.1/* ~/bin && export PATH=~/bin:$PATH
+        - wget -O liquibase-4.16.1.zip "https://github.com/liquibase/liquibase/releases/download/v4.16.1/liquibase-4.16.1.zip" && unzip liquibase-4.16.1.zip -d liquibase 
+        - chmod +x ./liquibase/liquibase
+        - mkdir -p ~/bin && cp -r ./liquibase/* ~/bin && export PATH=~/bin:$PATH
   pre_build:
       commands:
         # Docker Image Tag with Date Time & Code Buiild Resolved Source Version
@@ -37,7 +36,7 @@ phases:
   build:
     commands:
       - echo "Comparing databases DEV to Testing"
-      - ./liquibase --changelog-file=src/main/resources/db/changelog/changes/codebuild-$CODEBUILD_BUILD_NUMBER.xml\
+      - liquibase --changelog-file=src/main/resources/db/changelog/changes/codebuild-$CODEBUILD_BUILD_NUMBER.xml\
                   --url="$LIQUIBASE_DEV_URL"\
                   --username=$LIQUIBASE_DEV_USERNAME\
                   --password=$LIQUIBASE_DEV_PASSWORD\
