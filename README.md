@@ -1,8 +1,12 @@
-# Core Concepts of AWS Services
+# Spring-Boot application with Liquibase in Amazon EKS
+## Overview
+In this quick tutorial, we'll make use of [Liquibase](https://www.liquibase.org/) to evolve the database schema of a Java web application. Liquibase is a opensource tool to help database change with application code changes by using a version-based to update to your database.
+
+## Concepts of AWS Services
 1. [AWS CodeBuild](https://aws.amazon.com/codebuild/)
 2. [AWS CodePipeline](https://aws.amazon.com/codepipeline/)
 
-# Prerequisite
+## Prerequisite
 1. You need to have an Amazon EKS Cluster. See [here](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) to create an Amazon EKS cluster
 2. Creating an STS Assume IAM role for AWS CodeBuild to apply K8s manifests to Amazon EKS. In this step, we are going to create an IAM role and add an inline policy EKS:Describe that we will use in the CodeBuild stage to interact with the EKS cluster via kubectl.
 ```shell
@@ -36,7 +40,7 @@ kubectl patch configmap/aws-auth -n kube-system --patch "$(cat /tmp/aws-auth-pat
 kubectl get configmap aws-auth -o yaml -n kube-system
 ```
 
-# Create an AWS CodeBuild Project.
+## Create an AWS CodeBuild Project.
 1. Create an buildspec.yaml. The sample is below. You can find it in [here](https://github.com/KerriganAWS/liquibase-app-demo/blob/main/buildspec.yml).
 ```yaml
 version: 0.2
@@ -157,7 +161,7 @@ artifacts:
         - Build Provider: AWS CodeBuild
         - Region: ap-northeast-1 (Tokyo)
         - Project Name: Choose the project (eks-devops-cb-for-pipe) you just created.
-# Clean-Up
+## Clean-Up
 1. Delete All kubernetes Objects in EKS Cluster
 ```shell
 kubectl delete -f kube-manifests/
