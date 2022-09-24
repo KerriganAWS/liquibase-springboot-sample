@@ -36,5 +36,5 @@ phases:
       - printf '[{"name":"$MANIFEST_FILE_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json           
 artifacts:
   files: 
-    - $TAG/build.json   
-    - $TAG/kube-manifests/*
+    - build.json   
+    - kube-manifests/*
