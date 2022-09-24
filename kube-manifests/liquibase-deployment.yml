@@ -8,19 +8,19 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: aws-eks-liquibase-my-app
   namespace: liquibase
   labels:
-    app: nginx
+    app: aws-eks-liquibase-my-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: aws-eks-liquibase-my-app
   template:
     metadata:
       labels:
-        app: nginx
+        app: aws-eks-liquibase-my-app
     spec:
       initContainers:
         - name: liquibase-base
@@ -42,7 +42,7 @@ spec:
                 key: password
                 optional: false
       containers:
-        - name: nginx
-          image: nginx:1.14.2
+        - name: aws-eks-liquibase-my-app
+          image: 405081423162.dkr.ecr.ap-northeast-1.amazonaws.com/aws-eks-liquibase-my-app:latest
           ports:
           - containerPort: 80

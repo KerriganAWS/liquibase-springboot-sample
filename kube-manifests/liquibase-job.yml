@@ -9,7 +9,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: liquibase
-  name: liquibase-job
+  name: aws-eks-liquibase-my-job
 spec:
   template:
     spec:
