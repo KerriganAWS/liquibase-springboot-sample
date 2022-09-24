@@ -1,6 +1,6 @@
 # Spring-Boot application with Liquibase in Amazon EKS
 ## Overview
-In this quick tutorial, we'll make use of [Liquibase](https://www.liquibase.org/) to evolve the database schema of a Java web application. Liquibase is a opensource tool to help database change with application code changes by using a version-based to update to your database.
+In this quick tutorial, we'll make use of [Liquibase](https://www.liquibase.org/) to evolve the database schema of a Java web application. Liquibase is an opensource tool to help database change with application code changes by using a version-based to update to your database.
 
 ## Concepts of AWS Services
 1. [AWS CodeBuild](https://aws.amazon.com/codebuild/)
