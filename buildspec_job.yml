@@ -27,7 +27,7 @@ phases:
                     --classpath=./liquibase/lib/mysql-connector-java-8.0.12.jar
                     diff-changelog
         # Docker Image Tag with Date Time & Code Buiild Resolved Source Version
-        - TAG="latest"
+        - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
         - MANIFEST_FILE_NAME="liquibase-job.yml"
         # Update Image tag in our Kubernetes Job Manifest        
         - echo "Update Image tag in kube-manifest..."
@@ -73,6 +73,6 @@ phases:
       - printf '[{"name":"$MANIFEST_FILE_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json           
 artifacts:
   files: 
-    - build.json   
-    - kube-manifests/*
-    - src/main/resources/db/changelog/changes/*
+    - $TAG/build.json   
+    - $TAG/kube-manifests/*
+    - $TAG/src/main/resources/db/changelog/changes/*

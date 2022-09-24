@@ -6,7 +6,7 @@ phases:
   pre_build:
       commands:
         # Docker Image Tag with Date Time & Code Buiild Resolved Source Version
-        - TAG="latest"
+        - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
         - MANIFEST_FILE_NAME="liquibase-app.yml"
         # Verify AWS CLI Version        
         - echo "Verify AWS CLI Version..."
@@ -36,5 +36,5 @@ phases:
       - printf '[{"name":"$MANIFEST_FILE_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json           
 artifacts:
   files: 
-    - build.json   
-    - kube-manifests/*
+    - $TAG/build.json   
+    - $TAG/kube-manifests/*
