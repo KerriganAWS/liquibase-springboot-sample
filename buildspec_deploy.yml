@@ -5,6 +5,7 @@ phases:
       java: corretto11
   pre_build:
       commands:
+        - MANIFEST_FILE_NAME="liquibase-deployment.yml"
         # Verify AWS CLI Version        
         - echo "Verify AWS CLI Version..."
         - aws --version
