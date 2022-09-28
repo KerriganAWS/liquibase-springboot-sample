@@ -10,6 +10,7 @@ public class LiquibaseDemo {
   public static void main(String[] args) {
     // Added new lines for testing
     final ApplicationContext context = SpringApplication.run(LiquibaseDemo.class, args);
-    System.exit(SpringApplication.exit(context, () -> 0));
+    // System.exit(SpringApplication.exit(context, () -> 0));
+    System.exit(0);
   }
 }
