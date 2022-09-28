@@ -55,6 +55,4 @@ phases:
       - echo "Docker Image Push to ECR Completed - $REPOSITORY_URI:$TAG"    
 artifacts:
   files: 
-    - build.json   
-    - kube-manifests/*
-    - src/main/resources/db/changelog/changes/*
+    - '**/*'
